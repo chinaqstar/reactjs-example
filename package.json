@@ -1,6 +1,7 @@
 {
   "author": "chinaqstar@gmail.com",
-  "name": "reactjs 学习记录",
+  "name": "reactjs 学习的一些例子",
+  "keywords": "reactjs example demo",
   "version": "0.0.1",
   "licenses": {
     "type": "ISC",
