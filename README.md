@@ -7,13 +7,12 @@
 react版本：v0.13.1
 
 # 内容
-React初识
-react组件化
-React定时器设置
-React中ES6的使用（...props）
-React事件
-refs的调用
-express-react-views初识
+- React初识
+- react组件化
+- React定时器设置
+- React中ES6的使用（...props）
+- React事件
+- refs的调用
 
 ## 一、React初识
 如何在html中使用reactjs代码
@@ -184,3 +183,5 @@ reactjs中组件是怎样一个形式
 				</div>, document.getElementById("time"));
 		</script>
 ```
+
+人懒不想写了...
