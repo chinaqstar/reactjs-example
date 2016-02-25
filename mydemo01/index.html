@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/JSXTransformer.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/jsx">
+      var names = ['Alice', 'Emily', 'Kate'];
+
+      var html = [<h1>欢迎</h1>,<h5>这是一个jsx中插入html代码的例子:&lt;script type="text/jsx"&gt;</h5>,
+      <h5>使用React.reder()来渲染dom标签，并将html显示出来！</h5>,
+      <input type="text" value={names[1]}/>,<br></br>];
+
+      React.render(
+        <div>
+        {
+          html
+        }
+        {
+           names[2]
+        }
+        {
+          names.map(function (name) {
+            return <div>Hello, {name}!</div>
+          })
+        }
+        <br></br>
+        <select >
+        {
+          names.map(function(name){
+            return <option value={name}>{name}</option>
+          })
+        }
+        </select>
+        <br></br>
+        {
+          names.map(function(name) {
+            return <input type="radio" name="stuName" value={name}>{name}</input>;
+          })
+        }
+        <br></br>
+        {
+          names.map(function(name) {
+            return <input type="checkbox" value={name}>{name}</input>
+          })
+        }
+        </div>
+        ,
+        document.getElementById('example')
+      );
+    </script>
+  </body>
+</html>

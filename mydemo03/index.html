@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<script src="../build/react.js"></script>
+		<script src="../build/JSXTransformer.js"></script>
+	</head>
+	<body>
+		<div id="time"></div>
+		<script type="text/jsx">
+			var SetIntervalMixin = {
+				componentWillMount: function() {
+					this.intervals = [];
+				},
+				componentWillUnmount: function() {
+					this.intervals.map(clearInterval);
+				},
+				setInterval: function() {
+					this.intervals.push(setInterval.apply(null, arguments));
+				}
+			};
+
+			var TickTock = React.createClass({
+				mixins: [SetIntervalMixin],
+				getInitialState: function() {
+					return {seconds: 0};
+				},
+				tickWalk: function() {
+					this.setState({seconds: this.state.seconds + 1});
+				},
+				componentDidMount: function() {
+					// 全局的定时
+					// setInterval(this.tickWalk, 1000);
+					// TickTock的定时
+					this.setInterval(this.tickWalk, 1000);
+				},
+				render: function() {
+					return (
+						<p>
+							计时器（秒）：{this.state.seconds} = {Math.round(this.state.seconds/60*1000)/1000} 分 = {Math.round(this.state.seconds/3600*10000)/10000} 小时
+						</p>
+					);
+				}
+			});
+
+
+			React.render(
+				<div>
+				<h2>经典的定时管理操作</h2>
+				<h5>定时开始：setInterval(function(){'\u007b'}...{'\u007d'},1000);</h5>
+				<h5>定时结束：clearInterval();</h5>
+				<h2>经典的回收定时：</h2>
+				<h5>var intervals = [];</h5>
+				<h5>定时开始：intervals.push(setInterval.apply(null,arguments));</h5>
+				<h5>定时结束：intervals.map(clearInterval);</h5>
+				<TickTock />
+				</div>, document.getElementById("time"));
+		</script>
+	</body>
+</html>

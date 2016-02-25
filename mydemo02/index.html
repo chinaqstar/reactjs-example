@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<script src="../build/react.js"></script>
+	<script src="../build/JSXTransformer.js"></script>
+</head>
+<body>
+	<div id="example"></div>
+	<script type="text/jsx">
+		var HelloTag = React.createClass({
+			getInitialState: function() {
+				return {hide: true};
+			},
+			handleClick: function() {
+				this.setState({hide: !this.state.hide});
+			},
+			render: function() {
+				var text = this.state.hide ? '' : this.props.detialCode;
+				return (
+					<div>
+						<li onClick={this.handleClick}>
+							<h4>{this.props.summaryCode}</h4>
+						</li>
+						<span>{text}</span>
+					</div>
+				);
+			}
+		});
+		
+		//React.render(<HelloTag name="123" />,document.getElementById('example'));
+		
+		var HelloApp = React.createClass({
+			getInitialState: function() {
+				return {hide: true}
+			},
+			handleClick: function(event) {
+				// console.log(this.props.children);
+				console.log(event.target);
+
+			},
+			render: function() {
+				var me = this,
+					detials = ["var Tag = React.createClass({...});",
+						'this.props中class与for属性要在取得时候要写成：className和htmlFor。for【属于label】 === 对lable的操作，与for绑定的节点一个效果。<label for="btn1">点我相当于点【我是按钮】</label><input type="button" id="btn1" value="我是按钮"/>',
+						"其实就是一个子节点的数组，可用map把子节点里的节点一个个取出来",
+						'如果遇上需要与用户交互的东西（变化的dom），最好用state来更新变化'],
+					desc = me.props.children.map(function(child, index) {
+						// 在map里面，所以要用me ，<li onClick={me.handleClick}>
+						return <HelloTag summaryCode={child} detialCode={detials[index]}></HelloTag>;
+					}),
+					header = [<h2>react组件化</h2>];
+				return (
+					<div>
+						{header}
+						<ol>{desc}</ol>
+					</div>
+					);
+			}
+		});
+		
+		React.render(
+			<HelloApp >
+				<span>使用this.createClass创建组件</span>
+				<span>使用this.props显示</span>
+				<span>使用this.children获取&lt;HelloApp&gt;下的子节点</span>
+				<span>使用this.state改变状态</span>
+			</HelloApp>,document.getElementById('example')); 
+	</script>
+</body>
+
+</html>

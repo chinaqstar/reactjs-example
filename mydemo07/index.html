@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<!--HTML5 doctype-->
+<html>
+<head>
+	<title>title</title>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<link rel="stylesheet" type="text/css" href="" />
+	<script type="text/javascript" charset="utf-8" src="../build/jquery.min.js"></script>
+</head>
+<body >
+	<form action="/newpage" method="post">
+		<input type="button" id="t" value="提交"></input>
+	</form>
+<script type="text/javascript">
+		$(document).ready(function() {
+
+		$("#t").click(function() {
+
+			jQuery.ajax({
+				type: "post",
+				url: "/newpage",
+				data: {},
+				async: false,
+				dataType: "json",
+				success: function() {
+					console.log("11111");
+				},
+				error: function() {
+					console.log("22222");
+				}
+			});
+		});
+		
+});
+
+		
+</script>
+</body>
+</html>

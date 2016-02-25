@@ -1,0 +1,15 @@
+{
+  "author": "chinaqstar@gmail.com",
+  "name": "reactjs 学习记录",
+  "version": "0.0.1",
+  "licenses": {
+    "type": "ISC",
+    "url": ""
+  },
+  "bugs": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "devDependencies": {}
+}

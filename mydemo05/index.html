@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<script src="../build/react.js"></script>
+		<script src="../build/JSXTransformer.js"></script>
+	</head>
+	<body>
+		<h2>Javascript讲义.事件[Event]</h2>
+		<p>语言是一种很伟大的东西。致伟大的创造者与使用者--程序员</p>
+		
+		<h3>事件监听的历史由来</h3>
+		<p>从前有一个姑娘Netsacpe，她制定了一套js的驱动机制（事件捕获）</p>
+		<p>后来有一个任性的王子IE，比较傲气，他认为“我凭啥要按照你制定的规则走”，于是他又创建了一套规则（事件冒泡）</p>
+		<p>再后来有一个叫做W3C的媒婆，想撮合两孩子，将他们融合在一起，于是事件顺序：</p>
+		<p>事件捕获 => 事件目标 => 事件冒泡</p>
+		<img src="eventBubble.jpg"></img>
+
+		<h3>React中onChange事件</h3>
+		<p>event.target === 触发事件的dom节点</p>
+		<p>React中:</p>
+		<p>1.input、textarea、select不显示的设置value则不限制用户的输入</p>
+		<p>2.input[radio]不显示的设置checked则不限制用户的选择</p>
+
+		<h2>例如：</h2>
+		<div id="event"></div>
+		<script type="text/jsx;harmony=true">
+			var InputTag = React.createClass({
+				getInitialState: function() {
+					return {value: "Hello!"};
+				},
+				handelClick: function(event) {
+					// console.log(event.target);
+					console.log(event.target.value);
+					this.setState({value: event.target.value.substr(0,10)});
+				},
+				render: function() {
+					// return <input type="text" value={this.state.value} onChange={this.handelClick}></input>;
+					// 不设置value，则不限制输入
+					return (
+						<div>
+						<input type="text" defaultValue="请输入..."></input>
+						<br></br>
+						<input type="checkbox" defaultValue="复选框">复选框</input>
+						<br></br>
+						<input type="radio" name="opt" defaultChecked>单选1</input>
+						<input type="radio" name="opt" >单选2</input>
+						<br></br>
+						<select defaultValue='B'>
+							<option value="A">A</option>
+							<option value="B">B</option>
+							<option value="C">C</option>
+						</select>
+						<br></br>
+						<select multiple={true} defaultValue={['B','C']}>
+							<option value="A">A</option>
+							<option value="B">B</option>
+							<option value="C">C</option>
+						</select>
+						</div>
+						);
+				}
+			});
+
+			React.render(<InputTag />,document.getElementById("event"));
+		</script>
+	</body>
+</html>

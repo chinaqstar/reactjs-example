@@ -1,0 +1,35 @@
+﻿<html>
+<head>
+	<script src="build/react.min.js"></script>
+	<script src="build/JSXTransformer.js"></script>
+</head>
+	<div id="index"></div>
+	<script type="text/jsx">
+		// var React = require('react');
+		
+		var Index = React.createClass({
+
+			render: function() {
+				var titleText = ['React初识','react组件化','React定时器设置','React中ES6的使用（...props）','React事件','refs的调用','express-react-views初识'],
+					titleLink = ['mydemo01/index.html','mydemo02/index.html','mydemo03/index.html','mydemo04/index.html','mydemo05/index.html','mydemo06/index.html','build/mydemo07/'];
+					
+				var html = 	titleText.map(function(text,index){
+								return (<div>
+									<a target='_self' href={titleLink[index]}>{text}</a>
+									<br></br>
+									</div>
+									);
+							});
+
+				return (
+					<div>
+						{html}
+					</div>
+				);
+			}
+		
+		});
+		
+		React.render(<Index />,document.getElementById("index"));
+	</script>
+</html>

@@ -1,0 +1,61 @@
+﻿<html>
+<head>
+	<script src="../build/react.js"></script>
+	<script src="../build/JSXTransformer.js"></script>
+</head>
+<body>
+	<h2>refs的调用时间</h2>
+	<p>ref属于react内部属性，所以只有在render中定义了ref才可以被调用</p>
+	<p>mount（render）之后，React.findDOMNode(this.refs.[])可调用</p>
+	<p>对html中的dom还是原来的调用方式</p>
+	<p>调用上层component的ref：this.refs.referTag.refs.referTagInput</p>
+
+	<h2>例如：</h2>
+	<p id="referp"></p>
+	<div id="refer"></div>
+	<script type="text/jsx;harmony=true">
+		var ReferTag = React.createClass({
+			getInitialState: function() {
+				return {value: "Hello!"};
+			},
+			handelChange: function(event) {
+				console.log("handelChange");
+				this.setState({value: event.target.value});
+			},
+			handelClick: function() {
+				this.setState({value: ''}, function() {
+					// refs 可以被调用是在render之后
+					React.findDOMNode(this.refs.theInput).focus();
+					console.log(document.getElementById("referp"));
+					// console.log(React.findDOMNode(this.refs.referp));
+				});
+				console.log("handelClick");
+			},
+			render: function() {
+				return (
+					<div>
+						<div onClick={this.handelClick}>ReferTag中的点击</div>
+						<input type="text" ref="theInput" onChange={this.handelChange} value={this.state.value}></input>
+					</div>
+					)
+			}
+		});
+
+		var ReferApp = React.createClass({
+			handelEvent: function() {
+				console.log(React.findDOMNode(this.refs.referTag.refs.theInput));
+			},
+			render: function() {
+				return (
+					<div>
+					<p onClick={this.handelEvent}>ReferApp中的点击</p>
+					<ReferTag ref="referTag"></ReferTag>
+					</div>
+					);
+			}
+		});
+
+		React.render(<ReferApp />,document.getElementById("refer"));
+	</script>
+</body>
+</html>

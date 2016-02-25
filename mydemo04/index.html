@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<script src="../build/react-with-addons.min.js"></script>
+		<script src="../build/react.js"></script>
+		<script src="../build/JSXTransformer.js"></script>
+	</head>
+	<body>
+		<h2>浏览器ES6模式</h2>
+		<h5>打开JSX的ES6模式：&lt;script type="text/jsx;harmony=true"&gt;</h5>
+		<h5>ES6赋值（对号入座）：{ title, checked, ...other } = this.props;</h5>
+		<h5>渲染顺序：先React.render，再React.createClass.render</h5>
+		<div id="openHarmony"></div>
+		<script type="text/jsx;harmony=true">
+			var FancyCheckbox = React.createClass({
+			  render: function() {
+			    // var { checked, title, ...other } = {checked:'true',title:'myTitle',userName:'usr'};
+			    var { title, checked, ...other } = this.props;
+			    var fancyClass = checked ? 'FancyChecked' : 'FancyUnchecked';
+			    var fancyTitle = checked ? 'X ' + title : 'O ' + title;
+			    return (
+			      <label>
+			        <input {...other}
+			          checked={checked}
+			          title={fancyTitle}
+			          className={fancyClass}
+			          type="checkbox" >复选框</input>
+			      </label>
+			    );
+			  }
+			});
+
+
+			React.render(
+				<div><FancyCheckbox checked={true} class="ax" title="myTitle"/></div>, document.getElementById("openHarmony"));
+		</script>
+	</body>
+</html>
